@@ -1,6 +1,6 @@
 QT      = core
-
 TEMPLATE = lib
+CONFIG += crypto
 
 DEFINES += QTGENTLEDB_LIBRARY
 

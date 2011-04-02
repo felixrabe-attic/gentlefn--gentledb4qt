@@ -19,24 +19,34 @@
 #define QTGENTLEDB_H
 
 #include <QString>
+#include <QHash>
 
 #include "qtgentledb_global.h"
 
 namespace QtGentleDB {
 
 class QTGENTLEDB_EXPORT ID {
+    void init(QByteArray array);
 public:
     ID();
-    ID(QString s);
+    ID(const char *str);
+    ID(const QByteArray &array);
+    ID(const QString &str);
     operator QString() const;
 private:
-    QString myString;
+    QByteArray myRawIdArray;
 };
 
 class QTGENTLEDB_EXPORT DB {
 public:
     DB();
-    ID operator+(QString x);
+    ID operator~();
+    ID operator+(QByteArray data);
+    const QByteArray operator-(const ID &id) const;
+    ID &operator[](const ID &id);
+private:
+    QHash<QString, QByteArray> myContent;
+    QHash<QString, ID> myPointers;
 };
 
 }
